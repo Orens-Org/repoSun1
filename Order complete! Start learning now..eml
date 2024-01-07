@@ -1,0 +1,1652 @@
+Received: from CY8PR12MB7146.namprd12.prod.outlook.com (2603:10b6:930:5e::14)
+ by IA0PR12MB7627.namprd12.prod.outlook.com with HTTPS; Tue, 13 Dec 2022
+ 18:03:00 +0000
+Received: from DM6PR01CA0009.prod.exchangelabs.com (2603:10b6:5:296::14) by
+ CY8PR12MB7146.namprd12.prod.outlook.com (2603:10b6:930:5e::14) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5880.18; Tue, 13 Dec 2022 18:02:57 +0000
+Received: from DM6NAM12FT039.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:5:296:cafe::ab) by DM6PR01CA0009.outlook.office365.com
+ (2603:10b6:5:296::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.10 via Frontend
+ Transport; Tue, 13 Dec 2022 18:02:57 +0000
+Authentication-Results: spf=softfail (sender IP is 136.179.16.100)
+ smtp.mailfrom=abmail.alerts.udemy.com; dkim=fail (body hash did not verify)
+ header.d=alerts.udemy.com;dmarc=fail action=oreject
+ header.from=alerts.udemy.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ abmail.alerts.udemy.com discourages use of 136.179.16.100 as permitted
+ sender)
+Received: from lv-exch04.corp.proofpoint.com (136.179.16.100) by
+ DM6NAM12FT039.mail.protection.outlook.com (10.13.179.59) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.5924.10 via Frontend Transport; Tue, 13 Dec 2022 18:02:57 +0000
+Received: from lv-exch02.corp.proofpoint.com (10.94.30.38) by
+ lv-exch04.corp.proofpoint.com (10.19.10.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
+ 15.1.2507.16; Tue, 13 Dec 2022 10:02:56 -0800
+Received: from mx2.proofpoint.com (10.94.4.83) by
+ lv-exch02.corp.proofpoint.com (10.94.30.38) with Microsoft SMTP Server id
+ 15.1.2507.16 via Frontend Transport; Tue, 13 Dec 2022 10:02:56 -0800
+Received: from pps.filterd (lv-ppsavagent02.corp.proofpoint.com [127.0.0.1])
+	by lv-ppsavagent02.corp.proofpoint.com (8.17.1.19/8.17.1.19) with ESMTP id 2BDHcQZi020796
+	for <nalmog@proofpoint.com>; Tue, 13 Dec 2022 10:02:56 -0800
+Authentication-Results-Original: corp.proofpoint.com;	spf=softfail
+ smtp.mailfrom=bounces+21743674-adf6-nalmog=proofpoint.com@abmail.alerts.udemy.com;
+	dkim=fail header.s=s1 header.d=alerts.udemy.com;	dmarc=fail
+ header.from=alerts.udemy.com
+Received: from mx0a-00148501.pphosted.com (mx0a-00148501.pphosted.com [67.231.144.185] (may be forged))
+	by lv-ppsavagent02.corp.proofpoint.com (PPS) with ESMTPS id 3mcry7x3ee-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <nalmog@proofpoint.com>; Tue, 13 Dec 2022 10:02:56 -0800
+Received: from pps.filterd (m0324649.ppops.net [127.0.0.1])
+	by mx.proofpoint.com.pph4a.pphosted.com (8.17.1.9/8.17.1.9) with ESMTP id 2BDEuawl016186
+	for <nalmog@proofpoint.com>; Tue, 13 Dec 2022 10:02:55 -0800
+Authentication-Results-Original: ppops.net;	spf=pass
+ smtp.mailfrom=bounces+21743674-adf6-nalmog=proofpoint.com@abmail.alerts.udemy.com;
+	dkim=pass header.d=alerts.udemy.com header.s=s1;	dmarc=pass
+ header.from=alerts.udemy.com
+Received: from o3608.abmail.alerts.udemy.com (o3608.abmail.alerts.udemy.com [149.72.173.41])
+	by mx.proofpoint.com.pph4a.pphosted.com (PPS) with ESMTPS id 3meukhk007-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <nalmog@proofpoint.com>; Tue, 13 Dec 2022 10:02:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alerts.udemy.com;
+	h=content-type:from:mime-version:subject:reply-to:to:cc:content-type:
+	from:subject:to;
+	s=s1; bh=csyGIj8HeEZ40efDZY5VbEz4SqXJbLz2HfMOj7t9eA4=;
+	b=JreGihWyVJCHy6dWI9bvBIIttNdk3TulNVYqV4sCh/o8p4hsoO6ViuLfQP43sn51ft5A
+	4XOu3LPRZpq9prD1g+qWa/7Y8N4mPDG4o3VtdTkdn9jhGAl1o0afOLyfOW3g4oI+Xt72GN
+	WGXciFj5tOffusKztnbqBI4AQC46KPVwvPdyIkdFRhlCdH0U6qCnxTRQywp60Bj9ogUWow
+	4MV8haDHSJ6pOQxunLJ/ZwdEMIY9MmTT93jMC6pyU3QgVstfe+efoi6la4K2ptnMeZbfWR
+	bVpf1w6Zwy+XDIdRAdu9rWYNmdWhtIlk+dKqlQjTTKMC1Z6Nr57Bj2BXJpiB7bAQ==
+Received: by filterdrecv-7cdd7b88b7-442rs with SMTP id filterdrecv-7cdd7b88b7-442rs-1-6398BE4D-CC
+        2022-12-13 18:02:53.481078218 +0000 UTC m=+2228082.021673185
+Received: from MjE3NDM2NzQ (unknown)
+	by geopod-ismtpd-6-6 (SG) with HTTP
+	id h0-rWq57QIOM_JBSztTWPg
+	Tue, 13 Dec 2022 18:02:53.430 +0000 (UTC)
+Date: Tue, 13 Dec 2022 18:02:53 +0000
+From: Udemy <hello@alerts.udemy.com>
+Message-ID: <h0-rWq57QIOM_JBSztTWPg@geopod-ismtpd-6-6>
+Subject: Order complete! Start learning now.
+Reply-To: no-reply@alerts.udemy.com
+X-SG-EID: =?us-ascii?Q?WpDZB=2F9tNcUNffiUzh3F7f9am9624FicFyXErTqNLV=2F+oiLCOi6GtJeA6R8z9s?=
+ =?us-ascii?Q?qTOv0TrUNauNhmXsOV8xUipVaCOAYepTCxg74z8?=
+ =?us-ascii?Q?5bPFCdAQjhyxsFrQtlPC0cSvNGBezDTdoTJNoeW?=
+ =?us-ascii?Q?LydzwAHwZ6BVz7F4CGs1IvGEdGaAUpIM6G06bIF?=
+ =?us-ascii?Q?lsIWHA+ZVZex5rOQR3Sust=2F=2FLM2ZDxmEnRDFzpQ?=
+ =?us-ascii?Q?ucEU8JGgmqk0Y7pdb67zpFL5xGZSpn7klOUPcn?=
+X-SG-ID: =?us-ascii?Q?N2C25iY2uzGMFz6rgvQsb8raWjw0ZPf1VmjsCkspi=2FKvUYPFb2vwyNNeBc9bJi?=
+ =?us-ascii?Q?ChT4rOAONlbbBmW6wxWVbzQFyN=2FiCIvgmxk9Xt2?=
+ =?us-ascii?Q?MkmOc0kNb7KrtoJ7dk0iJY8sJ+3Cpz8ai=2FFtEdm?=
+ =?us-ascii?Q?cJAxLEiN6sXz6Wz5PAd1gNSzzKlkrFbclJtmLxv?=
+ =?us-ascii?Q?dUitxYVEzz3crHF3wx4xvEZ7Ybti3kCiKe8BlOt?=
+ =?us-ascii?Q?pNQ=2Fv76kIUrUOpuccLc2ITttwGpryW8XQ56nGBf?=
+ =?us-ascii?Q?E2BsENg43T3SJRmrzzWpT0NpK55Js5mUz0y9+xl?=
+ =?us-ascii?Q?pnnT=2FQEDPzjgpF3WnxK5vaAGjgUVT47KDLdGjoz?=
+ =?us-ascii?Q?r8BWUf7iYS4NmJWUb=2FeFH6wZP8ipg3tZl=2FvXJGa?=
+ =?us-ascii?Q?HZT3M7ghskcOoqnJJIBeDtzwbbpFi9yCp5Rt2K3?=
+ =?us-ascii?Q?uxJedCi1p9hjSJAiiqGouo3aRHYjC124vAk1G=2Fb?=
+ =?us-ascii?Q?zvTn3EQjW8+oaFkoAnqKfoWe8QUYq+KOyfT9A2w?= =?us-ascii?Q?=3D?=
+To: nalmog@proofpoint.com
+X-Entity-ID: y2lVad9k/ekQ9cHp3SSD0A==
+MIME-Version: 1.0
+X-Proofpoint-ORIG-GUID: UNylUf5XyaKIyHRsUtDtIYXVojP22aGM
+X-CLX-Shades: MLX
+X-Proofpoint-GUID: UNylUf5XyaKIyHRsUtDtIYXVojP22aGM
+X-CLX-Response: 1TFkXGBgbEQpMehcaEQpZRBd6bkB8TR9pHkMYUhEKWFgXYlMSZmcbHmQdQRw RCnhOF2tDfhthW11dbkkcEQp4SxdiUxJmZxseZB1BHBEKQ0gXBxMaEQpDWRcHGRkYEQpDSRcaBB oaGhEKWU0XZ2ZyEQpZSRcacRoQGncGGBobcRsaGxAadwYYGgYaEQpZXhdsbHkRCklGF1paSUVYW
+ nVDREhFX0ROdUJFWV5PThEKSUcXeE9NEQpDThd/ZFNGf0wfclNLYWNTYnhZf15uXmNzcnxFQHoY GEttZxEKWFwXHwQaBBgSGwUbGgQbGhoEGxkeBBkfEBseGh8aEQpeWRdLUEdmWxEKTVwXGB4TEQp MWhdpf21dTU0RCkVZF2hraxEKTF8XegUFBQUFBQUFBR0RCkxGF29ra2NraxEKQk8XbxkfTmJjQB
+ 9HaG8RCkNaFxseEwQdGAQbHRkEHhsRCkJeFxsRCkJcFxsRCkJLF2N4Yk1SHWdiSX0aEQpCSRdrQ 34bYVtdXW5JHBEKQkUXZFloX2VMZUlAfmQRCkJOF2tDfhthW11dbkkcEQpCTBdkRk15Eml5TkdP GxEKQmwXZnkZQHl5WUBOcGkRCkJAF3pgc316fB4SbwFZEQpCWBdmSR9kWWNEXWMcUxEKTV4XGxE
+ KWlgXGxEKeUMXbxJGWRNwfllMbGERCnBnF2tafk5zTkEfQBNHEB0aEQpwaBdiXhpfWGRSRBhkfB AaEQpwaBdgUk54Tx0BWBltRBAaEQpwaBdraX17HgVgfl9bGBAcGhEKcGgXaFtAflBweHxDcBIQH RoRCnBoF3pPHElhUwUdS3BhEBoRCnBoF25OUwFfUnJmG29PEBwaEQpwaBdoQR9fH01ncHBPUxAc
+ GhEKcGgXbR1CSEdAGHJQfmUQHBoRCnB9F24YRF1LGV5beRNyEBoRCnB9F2hgGnNsaWRNcFtGEBo RCnB9F2JIZ3Nbb2hOUkBaEBoRCnB9F2Rif3NAHHxSWXtrEBoRCnB9F2hfXmFzbX5BQ11AEBoRCn B9F2MTGB5IWEcSEkQYEBoRCnB9F2R8a21eGW8bYgUSEBoRCnB9F25vGFJmW2NhS0VEEBoRCnB9F
+ 2VPXXIcQXpnfRweEBoRCnB9F2BtfmhDTh1IbENIEBoRCnB9F2sYb0Fnc3NuBW54EBoRCnB9F2Bz fBpjfx5Ae1kdEBoRCnB9F21vE39DRkd7E1pTEBoRCnB9F21mR2dQBXN8RkdaEBoRCnB9F2ZrWWx jQ21ubUJ4EBoRCnB/F2d/e2RsbUxmHnh5EBMdEQpwXxdnZBkSZGdCS0VhfBAeGhEKcGwXZhsTWh
+ ltbmcYHX4QGx4fEQptfhcbEQpYTRdLESA=
+X-Proofpoint-Banner-Trigger: inbound
+X-Proofpoint-SPF-Result: pass
+X-Proofpoint-SPF-Record: v=spf1 include:sendgrid.net ~all
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-13_03,2022-12-13_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 bulkscore=0 adultscore=0
+ impostorscore=0 mlxlogscore=999 priorityscore=0 suspectscore=0
+ phishscore=0 malwarescore=0 clxscore=221 lowpriorityscore=0 spamscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2212070000
+ definitions=main-2212130158
+PRS-Collect-GUID: UNylUf5XyaKIyHRsUtDtIYXVojP22aGM
+X-Proofpoint-Virus-Version: vendor=nai engine=6500 definitions=10560 signatures=596816
+Return-Path:
+ bounces+21743674-adf6-nalmog=proofpoint.com@abmail.alerts.udemy.com
+X-PassedThroughOnPremises: Yes
+X-CrossPremisesHeadersFilteredBySendConnector: lv-exch04.corp.proofpoint.com
+X-OrganizationHeadersPreserved: lv-exch04.corp.proofpoint.com
+X-MS-Exchange-Organization-ExpirationStartTime: 13 Dec 2022 18:02:57.6682
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 959c364d-3bf2-4c21-1557-08dadd344416
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM12FT039:EE_|CY8PR12MB7146:EE_
+X-MS-Exchange-Organization-AuthSource:
+ DM6NAM12FT039.eop-nam12.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: proofpoint.com
+X-MS-Office365-Filtering-Correlation-Id: 959c364d-3bf2-4c21-1557-08dadd344416
+X-MS-Exchange-Organization-SCL: -1
+X-Microsoft-Antispam: BCL:0;
+X-Forefront-Antispam-Report:
+ CIP:136.179.16.100;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:CAL;SFV:NSPM;H:lv-exch04.corp.proofpoint.com;PTR:InfoNoRecords;CAT:NONE;SFS:;DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2022 18:02:57.5744
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 959c364d-3bf2-4c21-1557-08dadd344416
+X-MS-Exchange-CrossTenant-Id: 46785c73-1c32-414b-86bc-fae0377cab01
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=46785c73-1c32-414b-86bc-fae0377cab01;Ip=[136.179.16.100];Helo=[lv-exch04.corp.proofpoint.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+ DM6NAM12FT039.eop-nam12.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7146
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.3118725
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5880.019
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?s1GP9IufEPfc8B5ugg/k4z3ejvgKdVZ3/ZAWkC89LlBhszViL+/DSBab775T?=
+ =?us-ascii?Q?93oThgs/kzKjDIcUlV+AmIoiJPfHzkCZEoB757WyfkbqBNSkj1pQagP6UC8e?=
+ =?us-ascii?Q?212Cw6KvoUJSAsE6LqBcToYrJKB45wS3jlqRCEHzDQz7f4C4N/bt5MKB8se2?=
+ =?us-ascii?Q?o57wXCthLK0komvCF2DB46/TKF/D1W4AGhHMeYREvappaQ6ocZbaGF9KBky6?=
+ =?us-ascii?Q?IpCRvSHSrQ0YIBX1sFUgsNfBaQRl6GsZkz+Fi1lQkcpQrG/o1zfGo02AgqQs?=
+ =?us-ascii?Q?DmNASv0nRFC6u+dzZGkTT3t0J9BgPRBgF0uiIlUcR7GbPjU9NpxCwFb+LE78?=
+ =?us-ascii?Q?45PjZqVoW5VyI/HY4otDXD8YXcu78LcLXv7bzRFO/m/DY+LFcI7J4rlmqsOA?=
+ =?us-ascii?Q?EcEWiyuqda28p8h0OzV97HquSVMv37N7gdd//cF7v+hHSpPvw3Dn7slyyZUd?=
+ =?us-ascii?Q?0S7IAdDR6DwTIkIvqVbFQTI9wRKnK/7MUdPPK4alXC7omNdnsp31t6omM+mH?=
+ =?us-ascii?Q?kBobO/wRVCQMr+Lp74rL1nHBZ4tLaGzQMdo5EcM685h3Afgqj2Rg0K0XzpXb?=
+ =?us-ascii?Q?btHKyJYubjeth4mKEZE8KUnT4EAi5Muhr3FlTryROdzUmnRdeNyuCEJAl0N1?=
+ =?us-ascii?Q?k1XrU8/mE0h2v/VUzBF2ORqO8EkrEzudeVlXAIZ7Im1qL9erHVooX5byRU8D?=
+ =?us-ascii?Q?U8rzd2cKpP2IcwmiV5giMvbYRo4Pm7/h2ek34+1j0IZEONI0aQ63BfT2H/71?=
+ =?us-ascii?Q?KPG+zG09WcSilDCXAIS6fnyIaBiiOYfeYiuCff6Ieq2QCX+9KQG74Cg9C32B?=
+ =?us-ascii?Q?9QJYHPm6rBUKLtGejL6pEsHNWz3AmX3IIn6Jm4wHwiyHJiVvw/vP3n3BA/Du?=
+ =?us-ascii?Q?Td0uBe79ixKZyb8K26Qs0NzL9eLic5MCiFEntHCeBzXFnrPGNH059Uz+Ejca?=
+ =?us-ascii?Q?SfTM6NHS6jmebzctqZytQfiONP6Juhz1jliIwU+2E/az/MejHIhR+KbfFPfc?=
+ =?us-ascii?Q?1X+2miyonKAHKV2JHQhwC62y0e/UJG+8BfXlszfIyudHqQ8f2EBikKdrVwUt?=
+ =?us-ascii?Q?hxWtSRJKwF2TlnDcgn9IzwoMtv9Oc6v4LPtFPJPy5y9fRw3z/y8F67KU31el?=
+ =?us-ascii?Q?CSuULWfq251LxfoV5klCjYkLfbdsYu3KAUb/iMqZrLMPmhcIQvzuWSw9wCox?=
+ =?us-ascii?Q?JNP5hsg7fF3I7KU1xt019RyqX/6Zg8LNdLXUIKkvQApD9q5weaAMaxqc1nTE?=
+ =?us-ascii?Q?K1lF4Z/r7+2LBPA67EAy7yydUXdQ+pe0JeP1NmLJcwgungGRzOCTCdnG2Ob3?=
+ =?us-ascii?Q?nx0m25AhSghkO67Zf0XP7eL4wLpu3yOEZfrYUYL6sMDqk+frbP7Ib4vuXM9r?=
+ =?us-ascii?Q?pdKzLOAEye/pQ9bB7lMKai48w8gxxdELGgyJrTCHot6HvxpZJD1Pk5kOAIZS?=
+ =?us-ascii?Q?5An0uzNlfgd53Wx4rnbjDr8ZUngbk22OI91uuTloOkfJQwm3VDkFlwB5OIkg?=
+ =?us-ascii?Q?ZEhrfuWbYY1R9sqpjocGG0kLvimPX0uo+vxfck1wT1Rly5tElmel9yvr1Z2s?=
+ =?us-ascii?Q?nswidHSpf6/pDl6bJGH3jAn5W+5u6w9Iyz80aW/CDBAVLXnYpQqxFpEjuLv5?=
+ =?us-ascii?Q?esrGajT+cntrDZNClfSR5Vg4ilhCVy1ASDSJNPC6XiVgiFYp+8n0zwPIt0FU?=
+ =?us-ascii?Q?n25JQOJNQ8xIofBK30Ax5stKAjuAKZOzcrxYKZF/cau048b8E8IWomMHaE5j?=
+ =?us-ascii?Q?Qd7ldPnwdImu8Kg4YDaRoULbcRQRPjBDL1ImrIXpCV6Pkq2pdnYaw/zNhE1j?=
+ =?us-ascii?Q?V52LwIIE7H9JimF7OmHtauwqd7ECmg3cCasx/0gCQgGzf3cRm4FCm7+MMirU?=
+ =?us-ascii?Q?IjNiYfqCWuIjCctDOLDLPlPRVi/oSlhjbCLv7rxdIlyhwu1xfl98iuarIXZq?=
+ =?us-ascii?Q?T0i0xFINVPfGQYE3kQw9yCdVcz+zXzHGS+Xyu8YxrDg=3D?=
+Content-type: multipart/alternative;
+	boundary="B_3754923735_2865549937"
+
+> This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--B_3754923735_2865549937
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+Thanks for choosing to learn with us =E2=80=94 we=E2=80=99re excited to be on your jour=
+ney with you. =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D=20
+ZjQcmQRYFpfptBannerStart
+This Message Is From an External Sender=20
+This message came from outside your organization.=20
+Report Suspicious=20
+=20
+ZjQcmQRYFpfptBannerEnd
+=20
+Thanks for choosing to learn with us =E2=80=94 we=E2=80=99re excited to be on your jour=
+ney with you.
+Udemy
+=CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=
+=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=
+=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C=
+ =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =CD=8F=E2=80=8C =20
+ =20
+=20
+Your order=E2=80=99s been processed=20
+You=E2=80=99re all set to start learning. Ready to jump in?=20
+Start learning=20
+Transaction date: 13/12/2022
+Transaction number: EC-6847616C5958536B6C61682B
+Course name
+List price
+Your price
+Advanced Scala and Functional Programming | Rock the JVM
+List Price:=E2=82=AA179.90Your Price:=E2=82=AA45.82
+Subtotal:=E2=82=AA45.82
+Tax rate:0.000
+Tax:=E2=82=AA0.00
+Credits:=E2=82=AA0.00
+Total:=E2=82=AA45.82
+Purchased by
+Nissan Almog
+
+
+Payment method: express-checkout =20
+Sold by
+Udemy, Inc.
+600 Harrison Street, 3rd Floor=20
+San Francisco, CA 94107, US
+=20
+Need help?
+Visit our Help Center for support.=20
+=20
+=20
+Download our app and learn anywhere
+=20
+=20
+   =20
+=20
+About us| Udemy Business
+You are receiving this email because you signed up on Udemy.com with this e=
+mail address.
+SupportPrivacy terms
+ Udemy.com 600 Harrison Street, 3rd Floor San Francisco, CA 94107 USA=20
+=20
+
+
+--B_3754923735_2865549937
+Content-type: text/html;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+<!DOCTYPE html><html><head><!-- BaNnErBlUrFlE-HeAdEr-start -->
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><style>
+  #pfptBannerrnu1nvh { all: revert !important; display: block !important;=20
+    visibility: visible !important; opacity: 1 !important;=20
+    background-color: #D0D8DC !important;=20
+    max-width: none !important; max-height: none !important }
+  .pfptPrimaryButtonrnu1nvh:hover, .pfptPrimaryButtonrnu1nvh:focus {
+    background-color: #b4c1c7 !important; }
+  .pfptPrimaryButtonrnu1nvh:active {
+    background-color: #90a4ae !important; }
+</style><!-- BaNnErBlUrFlE-HeAdEr-end --><!-- BaNnErBlUrFlE-BoDy-start --><=
+!-- Preheader Text : BEGIN --></head><body><div style=3D"display:none !importa=
+nt;display:none;visibility:hidden;mso-hide:all;font-size:1px;color:#ffffff;l=
+ine-height:1px;height:0px;max-height:0px;opacity:0;overflow:hidden;">Thanks =
+for choosing to learn with us =E2=80=94 we=E2=80=99re excited to be on your journey with=
+ you. =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D </div><!-- Preheader Text : END --><!-- Email Banner : BEG=
+IN --><div style=3D"display:none !important;display:none;visibility:hidden;mso=
+-hide:all;font-size:1px;color:#ffffff;line-height:1px;height:0px;max-height:=
+0px;opacity:0;overflow:hidden;">ZjQcmQRYFpfptBannerStart</div><!--[if ((ie)|=
+(mso))]>
+  <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" style=3D"pad=
+ding: 16px 0px 16px 0px; direction: ltr" lang=3D"en"><tr><td>
+    <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"padding: 0px 1=
+0px 5px 6px; width: 100%; border-radius:4px; border-top:4px solid #90a4ae;ba=
+ckground-color:#D0D8DC;"><tr><td valign=3D"top">
+      <table align=3D"left" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D=
+"padding: 4px 8px 4px 8px">
+	<tr><td style=3D"color:#000000; font-family: 'Arial', sans-serif; font-weigh=
+t:bold; font-size:14px; direction: ltr">
+	  This Message Is From an External Sender
+	</td></tr>
+	<tr><td style=3D"color:#000000; font-weight:normal; font-family: 'Arial', sa=
+ns-serif; font-size:12px; direction: ltr">
+          This message came from outside your organization.
+	</td></tr>
+
+      </table>
+      <![if ie]><br clear=3D"all"><![endif]>
+      <table align=3D"right" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=
+=3D"padding: 4px 0px 4px 0px"><tr>
+	<td style=3D"direction: ltr">&nbsp;&nbsp;<a target=3D"_blank" href=3D"https://us=
+-phishalarm-ewt.proofpoint.com/EWT/v1/ORgEfCBsr282Fw!bXPyZOLz0ZihmXQakd1f_Cj=
+R8512S4qqzFeh5yTWdnql_pF75N3VPL_dW7ri5Tyy8_hswwFA2YhKjScYJQUQMg2VQxE$" style=
+=3D"mso-padding-alt: 7.5px; padding: 7.5px; border-radius: 2px; border: 1.5px =
+solid #666666; "><strong style=3D"font-weight: normal; color: #000000; text-de=
+coration: none; font-family: 'Arial', sans-serif; font-size:14px; line-heigh=
+t: 40px; ">&nbsp;&nbsp;Report&nbsp;Suspicious&nbsp;&nbsp;</strong></a>&nbsp;=
+&nbsp;&zwnj; </td>
+      </tr></table>
+    </td></tr></table>
+  </td></tr></table>
+<![endif]--><![if !((ie)|(mso))]><div dir=3D"ltr" lang=3D"en" id=3D"pfptBannerrnu=
+1nvh" style=3D"all: revert !important; display:block !important; text-align: l=
+eft !important; margin:16px 0px 16px 0px !important; padding:8px 16px 8px 16=
+px !important; border-radius: 4px !important; min-width: 200px !important; b=
+ackground-color: #D0D8DC !important; background-color: #D0D8DC; border-top: =
+4px solid #90a4ae !important; border-top: 4px solid #90a4ae;"><div id=3D"pfptB=
+annerrnu1nvh" style=3D"all: unset !important; float:left !important; display:b=
+lock !important; margin: 0px 0px 1px 0px !important; max-width: 600px !impor=
+tant;"><div id=3D"pfptBannerrnu1nvh" style=3D"all: unset !important; display:blo=
+ck !important; visibility: visible !important; background-color: #D0D8DC !im=
+portant; color:#000000 !important; color:#000000; font-family: 'Arial', sans=
+-serif !important; font-family: 'Arial', sans-serif; font-weight:bold !impor=
+tant; font-weight:bold; font-size:14px !important; line-height:18px !importa=
+nt; line-height:18px">This Message Is From an External Sender </div><div id=3D=
+"pfptBannerrnu1nvh" style=3D"all: unset !important; display:block !important; =
+visibility: visible !important; background-color: #D0D8DC !important; color:=
+#000000 !important; color:#000000; font-weight:normal; font-family: 'Arial',=
+ sans-serif !important; font-family: 'Arial', sans-serif; font-size:12px !im=
+portant; line-height:18px !important; line-height:18px; margin-top:2px !impo=
+rtant;">This message came from outside your organization. </div></div><div i=
+d=3D"pfptBannerrnu1nvh" style=3D"all: unset !important; float: right !important;=
+ display: block !important; display: block; margin: 0px 0px 0px 16px !import=
+ant; text-align: right !important; width: fit-content !important;"><a id=3D"pf=
+ptBannerrnu1nvh" href=3D"https://us-phishalarm-ewt.proofpoint.com/EWT/v1/ORgEf=
+CBsr282Fw!bXPyZOLz0ZihmXQakd1f_CjR8512S4qqzFeh5yTWdnql_pF75N3VPL_dW7ri5Tyy8_=
+hswwFA2YhKjScYJQUQMg2VQxE$" style=3D"all: unset !important; display: inline-bl=
+ock !important; text-decoration: none"><div class=3D"pfptPrimaryButtonrnu1nvh"=
+ style=3D"display: inline-block !important; display: inline-block; visibility:=
+ visible !important; opacity: 1 !important; color: #000000 !important; color=
+: #000000; font-family: 'Arial', sans-serif !important; font-family: 'Arial'=
+, sans-serif; font-size: 14px !important; font-weight: normal !important; te=
+xt-decoration: none !important; border-radius: 2px !important; padding: 7.5p=
+x 16px !important; margin: 3px 0 3px 16px !important; white-space: nowrap !i=
+mportant; width: fit-content !important;
+	border: 1px solid #666666">Report&nbsp;Suspicious </div></a></div><div sty=
+le=3D"clear: both !important; display: block !important; visibility: hidden !i=
+mportant; line-height: 0 !important; font-size: 0.01px !important; height: 0=
+px">&nbsp;</div></div><![endif]><div style=3D"display:none !important;display:=
+none;visibility:hidden;mso-hide:all;font-size:1px;color:#ffffff;line-height:=
+1px;height:0px;max-height:0px;opacity:0;overflow:hidden;">ZjQcmQRYFpfptBanne=
+rEnd</div><!-- Email Banner : END --><!-- BaNnErBlUrFlE-BoDy-end --><img src=
+=3D"https://ablink.alerts.udemy.com/wf/open?upn=3DJxoPmACmvl9IP1haC27IJsjAchlAER=
+SKatIRSbPKcWV9K3OSDreLXLUd8YIn8opfgtAbRx-2F8STvMJ5kU6q5AJop0yevPj-2FfvSAuznT=
+CO-2BLKtt9-2B8A1ZxBpiqXzJ91wKU5fbbvc9RK9wnh4iP5sE80Ks94Tru8-2BVxMljTdu0ePiBl=
+sABCClbrNufgXa0vnD8o-2FpXAAFiU6Q-2FX57qau7vX-2F8MPnwfijW1srAV4dL94Kn3KTrZugt=
+FV0PjxWMoRSID0ZF29xoNkElxwZj27xsa16Fua0wUdFkkMCgnoMiriwqhsooN3UWATQbWlHEzLxm=
+Weyoq33Su0x1yMllFUtcC-2BLVPFGhNetmIGJHIwIazY-2BblZ8Y9SbQuB8F7cmYbFjrydgQ8mwI=
+Pq2tzgzBcNybiOu2Zt5A6PYkEOpWodFVAyHHMe2KxLYrIac-2BMyGiBSXKxCn8tumTPDuz13uOFM=
+Fd8H7st9fs6eu9R3Hw8ykW9py5HwkZ49OmFSZf8VTsdKFnl-2FCl0rjSiaKwz02iFOiUtv6WNT75=
+kIO40qkjMF2y0Cp-2Bi7weNgPz6eUGiND0inky2WqUbQmhOb-2BoE7ZpRByuEB-2Bz6FT-2BDq5f=
+b5f9d7Ng58XFpB-2FQRuuu-2ForS-2BgXpIBij6kblS4CL5a7be7Tn9E9HBZ479Uj6Yenq-2F6Kq=
+kvmUpA25I-3D" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"height:1px !impo=
+rtant;width:1px !important;border-width:0 !important;margin-top:0 !important=
+;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !importa=
+nt;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !imp=
+ortant;padding-left:0 !important;"> <div style=3D"display:none !important;visi=
+bility:hidden;mso-hide:all;font-size:1px;color:#ffffff;line-height:1px;max-h=
+eight:0px;max-width:0px;opacity:0;overflow:hidden;">Thanks for choosing to l=
+earn with us =E2=80=94 we=E2=80=99re excited to be on your journey with you.</div><p></p=
+><meta name=3D"x-apple-disable-message-reformatting"><title>Udemy</title><styl=
+e type=3D"text/css">
+            @import url('https://fonts.googleapis.com/css?family=3DSource+San=
+s+Pro:300,400,600');
+        @import url('https://fonts.googleapis.com/css?family=3DZilla+Slab:300=
+,400,600');
+
+        /* CLIENT-SPECIFIC STYLES */
+        body,
+        table,
+        td,
+        a,
+        p {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            border-collapse: collapse;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* iOS BLUE LINKS */
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        .appleFooter a {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+       =20
+ =20
+
+        .courseBadge {
+            vertical-align: middle;
+            font-size: 9px;
+            border: none;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        <!-- ADD CUSTOM_CSS -->=20
+       =20
+
+           =20
+
+           =20
+       =20
+        .PriceMobile{
+        	padding-left: 47px;
+        }
+       =20
+           .Subtotal{
+ =20
+                padding-right:54px;
+
+            }
+       =20
+                .total{
+                	padding-right: 50px;
+                }
+       =20
+      .recieptWrapper {
+           padding-bottom: 37px !important;
+                padding-top: 50px !important ;
+            }
+
+
+        < !-- ADD CUSTOM_CSS -->
+        /* DESKTOP STYLES */
+
+        @media only screen and (min-width: 481px) {
+            .desktopNavBarText {
+                display: block !important;
+                padding: 24px 0px 5px 10px !important;
+                float: right !important;
+            }
+
+            .navBarImage {
+                float: left !important;
+                width: 150px !important;
+                padding: 5px 0px 5px 0px !important;
+            }
+
+            .mobshow {
+                display: none;
+                display: none !important;
+            }
+           =20
+         =20
+           =20
+
+            [data-ogsc] .mobshow {
+                display: none;
+                display: none !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            img[class=3Dhideimage] {
+                display: none !important;
+            }
+
+            *.nomobile {
+                display: none !important;
+            }
+                 .PriceMobile{
+        	padding-left: 0px;
+                    =20
+                     =20
+          =20
+        }
+           =20
+            .coursePriceMob{
+            	 padding-right:0px !important;
+    =20
+            }
+             .Subtotal{
+            	border-top: 0px solid transparent !important;
+                padding-right:0px;
+
+            }
+       =20
+                .total{
+                	padding-right: 0px;
+                }
+           =20
+            .Pt-50{
+            	padding-top:50px !important;
+            }
+ .footerPadding{
+        	padding:50px 23px 0px 23px !important;
+        }
+           =20
+            .both_price_mob{
+            	width:300px;
+
+            }
+       =20
+.SocialIcons{
+    width:210px;
+}
+           =20
+            .SocialIcons img{
+
+                width:25px;
+       =20
+}
+  =20
+            .titlePaddingMob {
+
+                max-width: 320px !important
+            }
+           =20
+            .recieptWrapper {
+           padding-bottom: 37px !important;
+                padding-top: 50px !important ;
+            }
+           =20
+          =20
+           =20
+               =20
+            .recieptInfoWrapper {
+           padding-bottom: 37px !important;
+   =20
+            }
+           =20
+
+           .Download_app{
+           	width:140px;
+               float: left;
+           }
+           =20
+              .Download_app img{
+           	width:140px;
+                  height:46px;
+        =20
+           }
+
+            .courseHeadingMob {
+
+                font-size: 16px !important;
+            }
+             .coursePriceMob {
+
+              padding-left:8px: !important;
+           =20
+            }
+
+
+            .W_200 {
+
+                width: 270px;
+            }
+           =20
+            .centerOnMob{
+            	float: left;
+                text-align: left !important;
+              =20
+            }
+           =20
+                                .noBorderDesktop{
+       =20
+     border-bottom:1px solid #0d0d0d !important;
+                       =20
+        }
+           =20
+           .HeightMob{
+             height:0px;
+           }
+
+            #container {
+                width: 100% !important;
+            }
+
+            #banner_text {
+                text-align: center !important;
+                padding-bottom: 10px;
+            }
+
+            .mw90 {
+                max-width: 90% !important;
+            }
+
+            .mw100 {
+                max-width: 100px !important;
+            }
+
+            .mobPaddingTop5 {
+                padding-top: 5px !important;
+            }
+
+            .mobPaddingRight10 {
+                padding-right: 10px !important;
+            }
+
+            .mobFont16 {
+                font-size: 16px !important;
+                line-height: 22px !important;
+            }
+           =20
+             .mobFont18 {
+                font-size: 18px !important;
+                line-height: 24px !important;
+            }
+
+            .mobHeadlineFont37 {
+                font-size: 37px !important;
+                line-height: 45px !important;
+            }
+
+            .deviceWidth {
+                display: block !important;
+                width: 100% !important;
+            }
+           =20
+            .W_Mobile{
+                width:282px;
+                height:auto;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .courseCardTop {
+                width: 30% !important;
+                float: left;
+                min-width: 30% !important;
+            }
+
+            .courseCardBottom {
+                width: 70% !important;
+                float: left;
+                min-width: 70% !important;
+                border-bottom: 0px !important;
+            }
+
+            .mobileColor {
+                background-color: #ffffff !important;
+            }
+
+            .mobileCourseLine {
+                border-bottom: 1px #fffffe solid;
+            }
+
+            .titleHeight {
+                height: auto;
+            }
+
+            .titlePadding {
+                padding-top: 0px !important;
+                padding-bottom: 10px !important;
+                padding-left: 10px !important;
+                font-size: 16px !important;
+            }
+
+            .starPricePadding {
+                padding-top: 0px !important;
+                padding-bottom: 0px !important;
+                padding-left: 10px !important;
+                font-size: 80% !important;
+            }
+
+            .courseImage {
+                width: 100%;
+                height: auto !important;
+            }
+
+            .moduleTitlePadding {
+                padding: 20px 0px 5px 0px !important;
+            }
+
+            .mobileCoursePadding {
+                padding: 15px 0px 15px 0px !important;
+                width: 100% !important;
+            }
+
+            .targetedSpacer {
+                width: 5%;
+            }
+
+            *.show {
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                width: auto !important;
+                max-height: inherit !important;
+            }
+
+            /*Table,Td resize*/
+
+            table[class=3Dresize_table_to_360],
+            td[class=3Dresize_table_to_360] {
+                width: 100% !important;
+                height: auto;
+                margin: 0 auto;
+            }
+
+            .drop {
+                width: 100% !important;
+                height: auto !important;
+                display: block !important;
+            }
+
+            .drop1 {
+                width: 80% !important;
+                height: auto !important;
+                display: block !important;
+            }
+
+            *[class=3D"drop"] {
+                display: block !important;
+                width: 100% !important;
+                padding-left: 0px !important;
+                padding-right: 0px !important;
+            }
+
+            .img_Rez {
+                width: 100% !important;
+                height: auto !important;
+                display: block !important;
+            }
+
+            .padding_mobile {
+                padding: 10px !important;
+            }
+
+            .mobile_padding {
+                padding-left: 25px !important;
+            }
+
+            span[class=3Dimageswitch_banner_top] {
+                display: block;
+                background-image: url('') !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+                width: 320px !important;
+                height: 198px !important;
+                background-size: 320px 198px !important;
+                padding-bottom: 50px !important;
+            }
+
+            .mobshow {
+                display: table !important;
+                width: auto !important;
+                overflow: visible !important;
+                float: none !important;
+                max-height: inherit !important;
+                max-width: inherit !important;
+                line-height: auto !important;
+                margin: auto !important;
+                margin-top: 0px !important;
+                visibility: inherit !important;
+            }
+
+            [data-ogsc] .mobshow {
+                display: table !important;
+                width: auto !important;
+                overflow: visible !important;
+                float: none !important;
+                max-height: inherit !important;
+                max-width: inherit !important;
+                line-height: auto !important;
+                margin: auto !important;
+                margin-top: 0px !important;
+                visibility: inherit !important;
+            }
+
+        }
+
+        /* Dark Mode Styles */
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #000001;
+            }
+
+            .ctaButton {
+                background-color: #fffffe !important;
+                color: #000001 !important;
+            }
+
+            .recieptWrapper {
+                background-color: #000001 !important;
+                color: #fffffe !important;
+            }
+           =20
+            .recieptInfoWrapper {
+                background-color: #000001 !important;
+                color: #fffffe !important;
+            }
+
+            .darkModeTextWhite {
+                color: #fffffe !important;
+            }
+
+            .darkModeBorderWhite {
+                border-color: #fffffe !important;
+            }
+           =20
+         .noBorderDesktop{
+                border-bottom:1px solid #fffffe !important;               =20
+         }
+          =20
+
+            /* Shows Dark Mode-Only Content, Like Images */
+            .dark-img {
+                display: block !important;
+                width: auto !important;
+                overflow: visible !important;
+                float: none !important;
+                max-height: inherit !important;
+                max-width: inherit !important;
+                line-height: auto !important;
+                margin-top: 0px !important;
+                visibility: inherit !important;
+            }
+
+            /* Hides Light Mode-Only Content, Like Images */
+            .light-img {
+                display: none;
+                display: none !important;
+            }
+
+            /* Custom Dark Mode Background Color */
+            .darkmode {
+                background-color: #000001 !important;
+            }
+
+            /* Divider Line */
+            .sectiondivider {
+                border-bottom: 1px solid #fffffe !important;
+            }
+
+            /* Custom Dark Mode Font Colors */
+            h1,
+            h2,
+            p,
+            span,
+            a,
+            b {
+                color: #ffffff !important;
+            }
+
+            .title_drk {
+                color: #ffffff !important;
+            }
+
+            /* Custom Dark Mode Text Link Color */
+            .link {
+                color: #91ADD4 !important;
+            }
+
+            /* Dark CTA */
+            [data-ogsc] .darkModeTextWhite {
+                color: #fffffe !important;
+            }
+
+            .darkctabtn {
+                padding: 13px 27px 13px 27px !important;
+                font-size: 16px !important;
+                color: #000000 !important;
+                text-decoration: none !important;
+                border-radius: 2px !important;
+                -webkit-border-radius: 2px !important;
+                -moz-border-radius: 2px !important;
+                background-color: #ffffff !important;
+                display: inline-block !important;
+                text-align: center !important;
+            }
+
+            /* Dark CTA */
+            [data-ogsc] .darkctabtn {
+                padding: 13px 27px 13px 27px !important;
+                font-size: 16px !important;
+                color: #000000 !important;
+                text-decoration: none !important;
+                border-radius: 2px !important;
+                -webkit-border-radius: 2px !important;
+                -moz-border-radius: 2px !important;
+                background-color: #ffffff !important;
+                display: inline-block !important;
+                text-align: center !important;
+            }
+        }
+
+        /* Shows Dark Mode-Only Content, Like Images */
+        [data-ogsc] .dark-img {
+            display: block !important;
+            width: auto !important;
+            overflow: visible !important;
+            float: none !important;
+            max-height: inherit !important;
+            max-width: inherit !important;
+            line-height: auto !important;
+            margin-top: 0px !important;
+            visibility: inherit !important;
+        }
+
+        /* Hides Light Mode-Only Content, Like Images */
+        [data-ogsc] .light-img {
+            display: none;
+            display: none !important;
+        }
+
+        /* Custom Dark Mode Background Color */
+        [data-ogsc] .darkmode {
+            background-color: #000000 !important;
+        }
+
+        /* Divider Line */
+        [data-ogsc] .sectiondivider {
+            border-bottom: 1px solid #ffffff !important;
+        }
+
+        /* Custom Dark Mode Font Colors */
+        [data-ogsc] h1,
+        [data-ogsc] h2,
+        [data-ogsc] p,
+        [data-ogsc] span,
+        [data-ogsc] a,
+        [data-ogsc] b {
+            color: #ffffff !important;
+        }
+
+        [data-ogsc] .title_drk {
+            color: #ffffff !important;
+        }
+
+        [data-ogsc] body {
+            background: #000001;
+        }
+
+        /* Custom Dark Mode Text Link Color */
+        [data-ogsc] .link {
+            color: #91ADD4 !important;
+        }
+    </style><meta name=3D"color-scheme" content=3D"light dark"><meta name=3D"supp=
+orted-color-schemes" content=3D"light dark"><meta name=3D"viewport" content=3D"wid=
+th=3Ddevice-width, initial-scale=3D1.0"><!-- PREHEADER --><div style=3D"display: n=
+one; max-height: 0px; overflow: hidden;">=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=
+=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=
+=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=
+=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp=
+;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbs=
+p;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nb=
+sp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&n=
+bsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&=
+nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C=
+&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=
+=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=
+=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=
+=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=
+=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=
+=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp=
+;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbs=
+p;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nb=
+sp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&n=
+bsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&=
+nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C=
+&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=
+=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=
+=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=
+=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=
+=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=
+=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp=
+;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbs=
+p;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nb=
+sp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&n=
+bsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&=
+nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C=
+&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=
+=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=
+=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=
+=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=
+=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=
+=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp=
+;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbs=
+p;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nb=
+sp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&nbsp;=CD=8F=E2=80=8C&n=
+bsp; </div><!-- // PREHEADER --><!-- USER DIRECTIVES --><!-- // USER DIRECTI=
+VES --><!-- Wrapper --><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" wid=
+th=3D"580" class=3D"drop" role=3D"presentation" align=3D"center"><tbody><tr><td><tab=
+le cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"presentatio=
+n"><tbody><tr><td><!-- Modules --><!-- Header --><!-- Dark Mode Header --><t=
+able align=3D"center" width=3D"100%" border=3D"0" cellpadding=3D"38px 0px 38px 0px" =
+cellspacing=3D"0"><tbody><tr><td align=3D"center"><a href=3D"https://urldefense.co=
+m/v3/__https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2Qy-=
+2Bw7Hdv4XiX251gqYUxTWmcolInR-2FMzGuLPvvKNZLtBS9k4zdqUR4KqYGDVHdRwcfIyiWS2o6e=
+QfuPWhJK0KDRBm4dBNLbuTaf08aw2ykZ16nIWURQe-2Bffd9oQ3DHgLUN5Vytv4OT-2B-2FYaHTu=
+LJUA902wDrScSApZtD78YuQ0TK1ujXgwLvNnGDiHVEhkbtXCoUMKIoNt-2Fk0eTbpJDgmD-2BIC7=
+7Kc1IAL1t2NFmqWkQNKUhLkiMWOCS1763Oa1EkodxDbP2EWtE6izPGrckkf6U-3DVawd_XE6iNkn=
+dNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ8lvo=
+VmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYOgtGNNu=
+kLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAAN5HVRP=
+2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzubzF7ipa=
+TSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHTx9u5Kn=
+sTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-2FND=
+cqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE8aVEAV=
+OexRsRlFzvd7W81wLKUGiKv0XMEZsdgNQ4UexmFQmNPYpb3VyqqV2lDcTQo5z7VZdmW9Wh5ZJCzC=
+fGIe6tT-2BUS-2BKoVbE0gyvkgcvRHX8m4WGUft4tZdZPQVET4FZRVC0OpVL-2F91-2Bl24tnxIt=
+jZw-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgT=
+hwByqWryLRAS7vuqqWACIXPpuhAC0iTOHWrk$"><img class=3D"light-img" src=3D"http://mi=
+.udemy.com/p/rp/278662707bd4dca8.png/?mi_u=3D63984605d64b00571b78a16c&amp;deal=
+_code=3D&amp;utm_source=3Demail-pro&amp;utm_campaign=3D220401_Student-MX_EM_Transa=
+ctional_Receipt_V2&amp;utm_medium=3DEmail&amp;utm_term=3DHEADER&amp;utm_content=3D=
+udemy_braze.0573a74a2ff5dd8fb2792879ab073fd4" width=3D"135" height=3D"auto" alt=3D=
+"Udemy" border=3D"0"><!-- The following Dark Mode logo image is hidden=20
+    with MSO conditional code and inline CSS, but will be        =20
+    revealed once Dark Mode is triggered --><!--[if !mso]><! --> <div class=
+=3D"dark-img" style=3D"display:none; overflow:hidden; float:left; width:0px; max=
+-height:0px; max-width:0px; line-height:0px; visibility:hidden;" align=3D"cent=
+er"><img src=3D"http://mi.udemy.com/p/rp/a7854d0a5566fdaa.png/?mi_u=3D63984605d6=
+4b00571b78a16c&amp;deal_code=3D&amp;utm_source=3Demail-pro&amp;utm_campaign=3D2204=
+01_Student-MX_EM_Transactional_Receipt_V2&amp;utm_medium=3DEmail&amp;utm_term=3D=
+HEADER&amp;utm_content=3Dudemy_braze.0573a74a2ff5dd8fb2792879ab073fd4" width=3D"=
+135" height=3D"auto" alt=3D"Udemy" style=3D"color: #ffffff; font-family: sans-seri=
+f; text-align:center;" border=3D"0"> </div><!--<![endif]--></a></td></tr></tbo=
+dy></table><!-- // HEADER --><!-- // Header --><!-- Gradient Hero --><!-- IM=
+AGE --><table width=3D"560" cellpadding=3D"0" cellspacing=3D"0" align=3D"center" sty=
+le=3D"width: 100%; max-width: 560px;text-align: center"><tbody><tr><td style=3D"=
+padding-top: 56px;" width=3D"100%" align=3D"center"><table width=3D"342" cellpaddi=
+ng=3D"0" cellspacing=3D"0" align=3D"center"><tbody><tr><td align=3D"center"><a href=3D=
+"https://urldefense.com/v3/__https://ablink.alerts.udemy.com/ls/click?upn=3Dgj=
+QpuGGK4loP1Y9YreUv2RHnTERcKTfrb7qLNB1A3HwQBmh1Jn6VZ8fS7KJDLFjSb0ShZfh7UYD0jK=
+so0gyglncT1nauFTsDcl7CEMxL68PcTtnnOJRSB30EEi65um2LCLz-2F3aiuS-2FnE8Dd1pceK4m=
+bCQuFQjTxupdU1Mx5vdFmT-2F3xlo7zaD9JfY-2FLjyGbcTnVSTdQKMLrXVHPL4LkAJV2lehS6mA=
+nH1cCAWpHgG5rYbjtQjWzLWJREQ60y5x7O5qN2vXN8YYHCqo5Zu1JUd0wENK-2BMIHW0bmC-2BPH=
+Ti-2FWxJSNKuDCqXC2XqCQ5AU7G78Y0MCp-2Bm2FQ8NpOAFA6-2BDuPjperCr3hvyza-2B7VeIPf=
+Y-3DEgCP_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A7=
+6nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVB=
+IFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCD=
+uv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrW=
+Nk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlE=
+S1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi=
+2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6Jtx=
+JK8zHZHLsE8aVbLAVZ3OBpMauNRDIW6PZIY3XEuDlLiQl-2B3M16EUizUEOjAQsweQCBBAclkYY2=
+HUYm9LsLF1YAOPGNGisaEgq6xyoQdKDJVJ8ot0dE1T26ePGvQqua9Mi9ywihgjU8Em26Qwqco5A0=
+bJ5hJUxMzEqwQ-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12=
+r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0cYYkeW8$" target=3D"_blank"><img class=3D=
+"W_Mobile" width=3D"342" style=3D"width:100%; max-width: 342px;  display:block;"=
+ src=3D"https://mi.udemy.com/p/rp/c8c734f92ce6caa1.png?mi_u=3D63984605d64b00571b=
+78a16c" alt=3D""></a> </td></tr></tbody></table></td></tr></tbody></table><!--=
+ / IMAGE --><table align=3D"center" width=3D"560" border=3D"0" cellspacing=3D"0" cel=
+lpadding=3D"0" style=3D"width:100%; max-width: 560px;" class=3D"drop"><!-- Copy --=
+><tbody><tr><td><table align=3D"center" width=3D"100%" border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0"><!-- Headline --><tbody><tr><td height=3D"60" align=3D"left" s=
+tyle=3D"font-size: 50px !important; line-height:60px; padding-top: 15px; font-=
+weight: bold;" class=3D"mobHeadlineFont37">Your order=E2=80=99s been processed </td>=
+</tr><!-- Sub Copy --><tr><td align=3D"left" style=3D"font-size:24px; line-heigh=
+t:28px; padding-top:21px;" class=3D"mobFont18 darkModeTextWhite">You=E2=80=99re all =
+set to start learning. Ready to jump in? </td></tr><!-- / Copy --></tbody></=
+table></td></tr></tbody></table><table align=3D"center" width=3D"100%" border=3D"0=
+" cellspacing=3D"0" cellpadding=3D"0"><!-- CTA --><tbody><tr><td align=3D"center" =
+valign=3D"top" style=3D"padding:40px 0px 50px 0px;"><table cellpadding=3D"0" cells=
+pacing=3D"0" border=3D"0"><tbody><tr><td align=3D"center" valign=3D"top" style=3D"text=
+-align:center; vertical-align: middle; background-color:#000000; height:50px=
+;" class=3D"ctaButton"><!--[if (gte mso 9)|(IE)]><table align=3D"center" cellpad=
+ding=3D"0" cellspacing=3D"0" border=3D"0" ><tr><td valign=3D"middle" background=3D"#00=
+0000" style=3D"text-align:center; height:50px; padding: 0 26px;" class=3D"ctaBut=
+ton"><![endif]--><a href=3D"https://urldefense.com/v3/__https://ablink.alerts.=
+udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2VqdENO9vZSK3Qm7CdTfE6bNpCX-2Fq5d=
+mI819np-2FYjZAg8kstetIJDbx0yTREIuxTbT2SbxpjD4HwasurNH55nSzWnr0Cz3WB0TELckf5q=
+3KEuNGggV2Wtt6iM18hO72kCVLNjR9IKtq-2FIQ8uN3FdM5eEtWMHGVeFAnZKZ4j4igvhnWDRJcJ=
+6HpzAh9Qc6w0ySJ0cCCm5kxwAqWwpvnH7pRC9XqpA5YXMThhVAIKcdnTJalmNdgc8Q26YWdwWavu=
+HG-2FQANZTgI4YQ7pBvXmenGLWR3zoMNLfuH1WhSVzOsQxVl2Hr_XE6iNkndNO68yj-2BVm5urw7=
+GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2=
+BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2Fdl=
+mfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCM=
+X9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX=
+9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYo=
+rTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTl=
+VvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE8aVQHRLbrNtZbXL7IACljy5=
+NfwaEjy-2FreedXJQ1TEWOpC-2FaMy4pkIvclAigpYkokjbCyPBwK1XFUXe0zGrLjmd5HQ3ba58h=
+CfnNJuumMmUOEdl6IqDT2gyeK0TUsKO2uqrYO7g3Muo1W3KOjGTI-2ByoQ3Q-3D-3D__;!!ORgEf=
+CBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWA=
+CIXPpuhAC0aA4zgUY$" style=3D"background-color:#000000;color:#ffffff;display:in=
+line-block;font-family: sans-serif; font-size:16px; line-height:28px; paddin=
+g: 12px 26px; text-align:center; text-decoration:none; -webkit-text-size-adj=
+ust:none;" class=3D"ctaButton">Start learning</a><!--[if (gte mso 9)|(IE)]></t=
+d></tr></table><![endif]--> </td></tr></tbody></table></td></tr><!-- /CTA --=
+></tbody></table><!-- // Gradient Hero --><!-- Recipt Section --><!-- Receip=
+t Assigns --><!-- // End Receipt Assigns --><table cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"560" class=3D"resize_table_to_360" role=3D"presentation=
+" align=3D"center"><tbody><tr><td><table cellpadding=3D"0" cellspacing=3D"0" borde=
+r=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td bgcolor=3D"f8f9fa" style=
+=3D"background-color:#f8f9fa; padding:48px 19px 8px 19px" class=3D"recieptWrappe=
+r"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"pres=
+entation"><tbody><tr><td colspan=3D"3" style=3D"padding-bottom:24px;" class=3D"dar=
+kModeBorderWhite Subtotal" align=3D"left"><table width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" border=3D"0" role=3D"presentation" align=3D"left"><tbody><tr><td a=
+lign=3D"left" style=3D"font-size: 20px; line-height:20px; text-align:left;paddin=
+g-right:40px;padding-top:5px;"><strong>Transaction date:</strong> 13/12/2022=
+</td></tr><tr><td align=3D"left" style=3D"font-size: 20px; line-height:20px; tex=
+t-align:left;padding-right:40px;padding-top:5px;"><strong>Transaction number=
+:</strong> EC-6847616C5958536B6C61682B</td></tr></tbody></table></td></tr><t=
+r></tr><tr><td class=3D"darkModeBorderWhite" height=3D"20" style=3D"border-bottom:=
+2px solid #000000;"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D=
+"100%" role=3D"presentation"><tbody><tr><td width=3D"298" height=3D"29" align=3D"lef=
+t" valign=3D"top" style=3D"font-size: 20px;font-weight: bold;letter-spacing: 0; =
+line-height: 20px;height:35px;" class=3D"drop mobileCoursePadding">Course name=
+</td><td class=3D"nomobile" valign=3D"top" align=3D"left" style=3D"text-align: left;=
+"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"prese=
+ntation"><tbody><tr><td width=3D"110" height=3D"29" align=3D"left" valign=3D"top" cl=
+ass=3D"drop" style=3D"font-size: 18px;line-height:20px;font-weight: bold;letter-=
+spacing: 0;min-width:90px;"><strong>List price</strong></td></tr></tbody></t=
+able></td><td class=3D"nomobile" valign=3D"top" align=3D"left" style=3D"text-align: =
+left;"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"=
+presentation"><tbody><tr><td width=3D"110" height=3D"29" align=3D"left" valign=3D"to=
+p" class=3D"drop" style=3D"font-size: 18px;line-height:20px;font-weight: bold;le=
+tter-spacing: 0;min-width:90px;"><strong>Your price</strong></td></tr></tbod=
+y></table></td></tr></tbody></table></td></tr><!-- Spacer --><tr><td colspan=
+=3D"3"><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" align=3D"center"><tbo=
+dy><tr><td height=3D"10"></td></tr></tbody></table></td></tr><tr><td style=3D"pa=
+dding-top:10px; padding-bottom:20px;"><table cellpadding=3D"0" cellspacing=3D"0"=
+ border=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td width=3D"297" vali=
+gn=3D"top" class=3D"drop titlePaddingMob" style=3D"text-align:left;font-size: 18px=
+;font-weight: bold;letter-spacing: 0; line-height: 20px;word-wrap: break-wor=
+d" align=3D"left;">Advanced Scala and Functional Programming | Rock the JVM</t=
+d><td class=3D"drop" width=3D"109" valign=3D"top" align=3D"left" style=3D"padding-top:=
+20px"><table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"p=
+resentation"><tbody><tr><td align=3D"right" style=3D"padding-left:30px;"><table =
+width=3D"225" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" role=3D"presentation" a=
+lign=3D"right" class=3D"both_price_mob" style=3D"min-width:170px"><tbody><tr><td w=
+idth=3D"80" height=3D"20" valign=3D"top" class=3D"show darkModeTextWhite courseHeadi=
+ngMob" style=3D"font-size:16px; line-height: 20px;  display: none;text-align:l=
+eft;padding-right:15px !important;"><strong>List Price:</strong></td><td wid=
+th=3D"56" align=3D"left" class=3D"darkModeTextWhite courseHeadingMob" style=3D"font-=
+family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px;lett=
+er-spacing: 0;line-height:20px; text-align: left;">=E2=82=AA179.90</td><td width=3D"=
+80" height=3D"20" valign=3D"top" class=3D"show darkModeTextWhite courseHeadingMob"=
+ style=3D"font-size:16px; line-height: 20px;  display: none;text-align:left;pa=
+dding-right:15px !important;"><strong>Your Price:</strong></td><td width=3D"56=
+" align=3D"left" class=3D"darkModeTextWhite courseHeadingMob" style=3D"font-family=
+: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px;letter-spa=
+cing: 0;line-height:20px; text-align: left;">=E2=82=AA45.82</td></tr></tbody></tab=
+le></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td><ta=
+ble cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"presentati=
+on"><tbody><tr><td height=3D"10"></td></tr></tbody></table></td></tr><tr><td c=
+olspan=3D"3" style=3D"border-top:1px solid #0d0d0d; border-bottom:2px solid #000=
+000;padding-bottom:30px; padding-top: 15px;" class=3D"darkModeBorderWhite Subt=
+otal" align=3D"right"><table width=3D"160" cellpadding=3D"0" cellspacing=3D"0" borde=
+r=3D"0" role=3D"presentation" align=3D"right"><tbody><tr><td height=3D"20" valign=3D"t=
+op" class=3D"darkModeTextWhite courseHeadingMob" style=3D"font-size:16px; line-h=
+eight: 20px; text-align:right;padding-right: 18px;min-width: 73px"><strong>S=
+ubtotal:</strong></td><td width=3D"56" align=3D"left" class=3D"darkModeTextWhite c=
+ourseHeadingMob" style=3D"font-family: 'Source Sans Pro', Helvetica, Arial, sa=
+ns-serif;font-size: 16px;letter-spacing: 0;line-height:20px; text-align: lef=
+t;">=E2=82=AA45.82</td></tr><!-- Spacer --><tr><td colspan=3D"3"><table width=3D"100%"=
+ cellpadding=3D"0" cellspacing=3D"0" align=3D"center"><tbody><tr><td height=3D"10"><=
+/td></tr></tbody></table></td></tr><tr><td height=3D"20" valign=3D"top" class=3D"d=
+arkModeTextWhite courseHeadingMob" style=3D"font-size:16px; line-height: 20px;=
+ text-align:right;padding-right: 18px;"><strong>Tax rate:</strong></td><td w=
+idth=3D"56" align=3D"left" class=3D"darkModeTextWhite courseHeadingMob" style=3D"fon=
+t-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px;le=
+tter-spacing: 0;line-height:20px; text-align: left;">0.000</td></tr></tbody>=
+</table></td></tr><tr><td colspan=3D"3" style=3D"border-top:1px solid #0d0d0d; b=
+ottom:25px;padding-bottom:30px; padding-top: 15px;" class=3D"darkModeBorderWhi=
+te total" align=3D"right"><table width=3D"160" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" role=3D"presentation" align=3D"right"><tbody><tr><td height=3D"20" valig=
+n=3D"top" class=3D"darkModeTextWhite courseHeadingMob" style=3D"font-size:16px; li=
+ne-height: 20px; text-align:right;padding-right:18px !important;"><strong>Ta=
+x:</strong></td><td width=3D"56" align=3D"left" class=3D"darkModeTextWhite courseH=
+eadingMob" style=3D"font-family: 'Source Sans Pro', Helvetica, Arial, sans-ser=
+if;font-size: 18px;letter-spacing: 0;line-height:20px; text-align: left;">=E2=82=
+=AA0.00</td></tr><!-- Spacer --><tr><td colspan=3D"3"><table width=3D"100%" cellpa=
+dding=3D"0" cellspacing=3D"0" align=3D"center"><tbody><tr><td height=3D"10"></td></t=
+r></tbody></table></td></tr><tr><td height=3D"20" valign=3D"top" class=3D"darkMode=
+TextWhite courseHeadingMob" style=3D"font-size:16px; line-height: 20px; text-a=
+lign:right;padding-right:18px !important;"><strong>Credits:</strong></td><td=
+ width=3D"56" align=3D"left" class=3D"darkModeTextWhite courseHeadingMob" style=3D"f=
+ont-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 18px;=
+letter-spacing: 0;line-height:20px; text-align: left;">=E2=82=AA0.00</td></tr><!--=
+ Spacer --><tr><td colspan=3D"3"><table width=3D"100%" cellpadding=3D"0" cellspaci=
+ng=3D"0" align=3D"center"><tbody><tr><td height=3D"10"></td></tr></tbody></table><=
+/td></tr><tr><td height=3D"20" valign=3D"top" class=3D"darkModeTextWhite courseHea=
+dingMob" style=3D"font-size:16px; line-height: 20px; text-align:right;padding-=
+right:18px !important;"><strong>Total:</strong></td><td width=3D"56" align=3D"le=
+ft" class=3D"darkModeTextWhite courseHeadingMob" style=3D"font-family: 'Source S=
+ans Pro', Helvetica, Arial, sans-serif;font-size: 18px;letter-spacing: 0;lin=
+e-height:20px; text-align: left;">=E2=82=AA45.82</td></tr></tbody></table></td></t=
+r><tr><td><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" align=3D"center"=
+></table></td></tr><tr><td></td></tr><tr><td></td></tr></tbody></table></td>=
+</tr></tbody></table></td></tr></tbody></table><!--Receipt Info --><table ce=
+llpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"560" class=3D"resize_table_to_=
+360" role=3D"presentation" align=3D"center"><tbody><tr><td><table cellpadding=3D"0=
+" cellspacing=3D"0" border=3D"0" width=3D"560" class=3D"resize_table_to_360" role=3D"p=
+resentation" align=3D"center"><tbody><tr><td><table cellpadding=3D"0" cellspacin=
+g=3D"0" border=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td style=3D"back=
+ground-color:#f8f9fa; padding:0px 19px 70px 19px" class=3D"recieptInfoWrapper"=
+><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"presen=
+tation"><tbody><tr><td><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" wid=
+th=3D"100%" role=3D"presentation"><tbody><tr><td width=3D"251" class=3D"drop" style=3D=
+"text-align:left; padding:px 0px 0px 0px;font-size: 16px; line-height: 20px;=
+  word-wrap: break-word;" valign=3D"top"><table width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" valign=3D"top"><tbody><tr><td width=3D"251" height=3D"24=
+" style=3D"font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-s=
+ize: 20px;font-weight: bold;letter-spacing: 0;padding-bottom:8px;" class=3D"mo=
+bileCoursePadding"><strong>Purchased by</strong></td></tr><!-- Divider --><t=
+r><td width=3D"251"><table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0"><tbody><tr><td style=3D" border-bottom: 1px solid #000000;" class=3D"darkMo=
+deBorderWhite"></td></tr><tr><td height=3D"9"></td></tr></tbody></table></td><=
+/tr><!--/divider--><tr><td width=3D"251" style=3D"text-align:left; font-size: 16=
+px; line-height: 20px;  word-wrap: break-word; font-weight: normal;padding-b=
+ottom:4px;"><strong>Nissan&nbsp;Almog</strong><br><br><br><span style=3D"font-=
+size: 16px; line-height:20px;padding-bottom:4px;"><strong>Payment method:&nb=
+sp;</strong>express-checkout</span> </td></tr></tbody></table></td><td class=
+=3D"drop">&nbsp;</td><td width=3D"251" class=3D"drop" style=3D"text-align:left; padd=
+ing:px 0px 0px 0px;font-size: 16px; line-height: 20px;  word-wrap: break-wor=
+d;" valign=3D"top"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"10=
+0%" role=3D"presentation"><tbody><tr><td style=3D"font-family:Arial, Helvetica, =
+sans-serif;font-size:15px;line-height:22px;font-weight:bold; align:left"><ta=
+ble width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" valign=3D"top"><tb=
+ody><tr><td height=3D"24" style=3D"font-family: 'Source Sans Pro', Helvetica, Ar=
+ial, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;padding-=
+bottom:8px;" class=3D"mobileCoursePadding"><strong>Sold by</strong></td></tr><=
+!-- Divider --><tr><td><table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpa=
+dding=3D"0"><tbody><tr><td style=3D" border-bottom: 1px solid #000000;" class=3D"d=
+arkModeBorderWhite"></td></tr><tr><td height=3D"9"></td></tr></tbody></table><=
+/td></tr><!--/divider--><tr><td style=3D"text-align:left; font-size: 16px; lin=
+e-height: 20px;   word-wrap: break-word; font-weight: normal;padding-bottom:=
+4px;">Udemy, Inc.</td></tr><tr><td style=3D"text-align:left; font-size: 16px; =
+line-height: 20px;  word-wrap: break-word; font-weight: normal;padding-botto=
+m:4px;">600 Harrison Street, 3rd Floor <br>San Francisco, CA 94107, US</td><=
+/tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td=
+></tr><tr><td height=3D"60" class=3D"HeightMob">&nbsp;</td></tr><tr><td><table c=
+ellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"presentation"><=
+tbody><tr><td width=3D"251" class=3D"drop" style=3D"text-align:left; padding:px 0p=
+x 0px 0px;font-size: 16px; line-height: 20px;  word-wrap: break-word;" valig=
+n=3D"top"><table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbod=
+y><tr><td height=3D"24" style=3D"font-size: 20px;font-weight: bold;letter-spacin=
+g: 0;padding-bottom:8px;padding-bottom:1px solid #000000;" class=3D"mobileCour=
+sePadding"><strong>Need help?</strong></td></tr><!-- Divider --><tr><td><tab=
+le width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0"><tbody><tr><td st=
+yle=3D" border-bottom: 1px solid #000000;" class=3D"darkModeBorderWhite"></td></=
+tr><tr><td height=3D"9"></td></tr></tbody></table></td></tr><!--/divider--><tr=
+><td style=3D"font-size: 16px; line-height:20px;word-break: break-word;">Visit=
+ our <a href=3D"https://urldefense.com/v3/__https://ablink.alerts.udemy.com/ls=
+/click?upn=3DgjQpuGGK4loP1Y9YreUv2eaVL5L1w5BIMD1u7vMXJCBy2SadXg0YE-2FGuH7tAykY=
+Ms19t_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQ=
+pSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFE=
+XRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5=
+wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk1=
+9JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Q=
+f0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vR=
+xqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8=
+zHZHLsE8aVIyMVdeUX1UjdDbo9WCbvFJptHW8wdyvI2NVGys8Okfx0GrBlY4Ym8uPRtYS6kIeZZj=
+N1-2FP-2FFxpWFUK5cguSE3YvWW3SWbE0BjbGq-2BIu-2FEmkg4sHDcg1YecEmU9ERhPpIoe4-2B=
+4mGBbVUD3OSDTQYlZw-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOS=
+nXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0zQXkWw4$" style=3D"text-decoration=
+:underline;color:#000000;">Help Center</a> for support.</td></tr></tbody></t=
+able></td><td class=3D"drop">&nbsp;</td><td width=3D"251" align=3D"left" valign=3D"t=
+op" class=3D"drop" style=3D"text-align: left;max-width: 261px;;"><table cellpadd=
+ing=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"presentation"><tbody><=
+tr><td style=3D"font-family:Arial, Helvetica, sans-serif;font-size:15px;line-h=
+eight:22px;font-weight:bold; align:left"></td></tr></tbody></table></td></tr=
+></tbody></table></td></tr><tr><td></td></tr><tr><td></td></tr></tbody></tab=
+le></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></t=
+able><!-- // Recipt Section --><!-- // Modules --></td></tr><tr><td><!-- Per=
+fect Audience - All Users Ongoing - DO NOT MODIFY --><img src=3D"http://ads.pe=
+rfectaudience.com/seg?add=3D1309468&amp;t=3D2" width=3D"1" height=3D"1" border=3D"0"><=
+!-- End of Audience Pixel --> </td></tr></tbody></table></td></tr></tbody></=
+table><!-- Footer --><!-- FOOTER--><table cellpadding=3D"0" cellspacing=3D"0" bo=
+rder=3D"0" width=3D"660" class=3D"resize_table_to_360" role=3D"presentation" align=3D"=
+center"><tbody><tr><td><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" wid=
+th=3D"100%" role=3D"presentation"><tbody><tr><td style=3D"background-color:#000000=
+; padding:50px 50px 0px 50px
+         " class=3D"footerPadding"><table cellpadding=3D"0" cellspacing=3D"0" bor=
+der=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td style=3D"color:#000000=
+;"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" role=3D"pres=
+entation" align=3D"left"><tbody><tr><td width=3D"238" class=3D"drop" style=3D"text-a=
+lign:left; padding:px 0px 0px 0px;font-size: 16px; line-height: 20px; color:=
+ #000000; word-wrap: break-word;" valign=3D"top" height=3D"80"><table width=3D"100=
+%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" valign=3D"top"><tbody><tr><td st=
+yle=3D"font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size:=
+ 32px;font-weight: bold;letter-spacing: 0;padding-bottom:5px;padding-bottom:=
+1px solid #000000; text-align: left"><span style=3D"text-align:left; font-size=
+: 16px; line-height: 20px; color: #000000; word-wrap: break-word; font-weigh=
+t: normal;padding-bottom:4px;"><a href=3D"https://urldefense.com/v3/__https://=
+ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2ahOPsVnPDQ6O0aaWDZ=
+YBp-2FtPYGT01ca5aTVQvn0jCGISomFmyuptAnpX5vVLRn-2BFCEfCkaJAaN5riW87nNur5wTSuu=
+jb-2BMQM6yhG-2Bk4WVwxD7Q24Z8O2-2FunmVJM7cIOOr378DNHP1zog7YnvILpOQsjyGiRZIoCk=
+P5-2BldzeyAyQehHz9BsGP39NoRkMALZwi1TYx5j385Vdy6EfrwPQsKv1-2FnC37IA7dqv8OfQm3=
+BkW9lLiZLhmqxeGCfNyfBh6r0kzMBLlTxc1DRuASBpN1Fw-3DrIoO_XE6iNkndNO68yj-2BVm5ur=
+w7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn=
+-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2F=
+dlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2Fip=
+CMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHs=
+MX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeC=
+YorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJ=
+TlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE8aVePDyXuhxzYZD5aqG2-=
+2FF7nEUjYOQG6K2dgDEMgWYjeacXxBN2rx5dZnUVp4c8OGFWjeZTQeNgKEw7Cv70O-2F-2FlA5uV=
+J01ZKBd1ohc4SU7DbEfxzljMXFLKpOxW3QX8XyXknh9YCQhjN9e7GjBObGYtYQ-3D-3D__;!!ORg=
+EfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqq=
+WACIXPpuhAC0x8g_hWw$"><img src=3D"https://mi.udemy.com/p/rp/47376bd62a6f07ae.p=
+ng"></a></span></td></tr></tbody></table></td><td class=3D"drop" width=3D"28" st=
+yle=3D"min-width: 20px;">&nbsp;</td><td align=3D"left" valign=3D"top" class=3D"drop"=
+ style=3D"text-align: left;max-width: 300px;;"><table cellpadding=3D"0" cellspac=
+ing=3D"0" border=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td style=3D"fo=
+nt-family:Arial, Helvetica, sans-serif;font-size:15px;line-height:22px;font-=
+weight:bold; align:left"><table width=3D"100%" border=3D"0" cellspacing=3D"0" cell=
+padding=3D"0" valign=3D"top"><tbody><tr><td class=3D"drop" colspan=3D"3" style=3D"font=
+-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px;fon=
+t-weight: bold;letter-spacing: 0;padding-bottom:1px solid #000000;padding-to=
+p:10px;color:#ffffff;">Download our app and learn anywhere</td></tr><!-- Div=
+ider --><tr><td height=3D"15" colspan=3D"2" style=3D"font-size: 15px;">&nbsp;</td>=
+</tr><tr><td class=3D"Download_app" style=3D"text-align:left; font-size: 16px; l=
+ine-height: 20px; color: #000000; word-wrap: break-word; font-weight: normal=
+;padding-bottom:4px;"><a href=3D"https://urldefense.com/v3/__https://ablink.al=
+erts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2Xk5xyMHcITIz63A1gkYmspuNPCT=
+wv-2FAWwHfenFWZ7mPKT4Vq4-2F-2BBlDcIzLZfVf8hGH1KgnUooSjdNyJNkHWr-2FRe3JvddMd0=
+9rKPTihClkYOuKxq-2BA7C71hHtDSwxJNaHemF5HT20F8x8ukoquNlDZ1-2Bh6cvAxsXmrM7i-2F=
+ztWrN0oLPwQRIneO6DxMalmKKWHxfVnH0JNsi1h6XesmUiy2-2BTuA3coIFSXeuEsVTDhgH7fo1l=
+b4YDXjzReuNsJ65KmSg7x5ocXuODCRmAV2WcDVUKcMYoa7S1F3y8udbQ3Mp2xFuZ_XE6iNkndNO6=
+8yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKN=
+vvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQn=
+RhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUb=
+HPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDH=
+AGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG=
+1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-=
+2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE8aVfepZt7h=
+Knx9445-2BwMz0P0YhPX8rDWu5z-2FwnlK5Pn0H-2BOtWdbUFSxI5wMubFaEFDPB8SvSePMXe8C1=
+HqHREkBW42FOrF2y2YMWIEAlHA4C-2Bdox-2FJ8xw7ws7t2IZFbFnRlJINq9oThsGmC9VsO2ytyO=
+g-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgThw=
+ByqWryLRAS7vuqqWACIXPpuhAC0Dkp-kkM$"><img src=3D"https://mi.udemy.com/p/rp/eb5=
+950f4f952f9dd.png" width=3D"140" style=3D"max-width: 144px"></a></td><td align=3D"=
+left" class=3D"Download_app" style=3D"text-align:left; font-size: 16px; line-hei=
+ght: 20px; color: #000000; word-wrap: break-word; font-weight: normal;paddin=
+g-bottom:4px;padding-left:12px;"><a href=3D"https://urldefense.com/v3/__https:=
+//ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2Xk5xyMHcITIz63A1=
+gkYmspuNPCTwv-2FAWwHfenFWZ7mPKT4Vq4-2F-2BBlDcIzLZfVf8hGH1KgnUooSjdNyJNkHWr-2=
+FRe3JvddMd09rKPTihClkYOuKxq-2BA7C71hHtDSwxJNaHemF5HT20F8x8ukoquNlDZ1-2Bh6cvA=
+xsXmrM7i-2FztWrN0oLPwQRIneO6DxMalmKKWHxfVnH0JNsi1h6XesmUiy2-2BTuA3coIFSXeuEs=
+VTDhgH7fo1lb4YDXjzReuNsJ65KmSg7x5ocXuODCRmAV2WcDVUKcMYoa7S1F3y8udbQ3Mp2Qh_6_=
+XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LK=
+zgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVY=
+OgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiA=
+AN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzu=
+bzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JH=
+Tx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTc=
+pD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLs=
+E8aVFThqjbZb1WzTBNykQ9QY39KuwgFSAk0No1pxQPG4AbqDIppH-2B0MuzaQJt-2BDoh0M7MidL=
+FCVuqCzlWl34gMnJiXQeefPL2h7snS4CJzR18l4ZjZdWaUVvQD5k8HpgXfmPA97Kfv9FnA787Y3C=
+po1T7w-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuz=
+cgThwByqWryLRAS7vuqqWACIXPpuhAC0dkZkulQ$"><img src=3D"https://mi.udemy.com/p/r=
+p/3199c390e5167bb1.png" width=3D"140" style=3D"max-width: 144px"></a></td></tr><=
+/tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr=
+><tr><td height=3D"60">&nbsp;</td></tr><tr><td><table cellpadding=3D"0" cellspac=
+ing=3D"0" border=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td style=3D"te=
+xt-align:left; padding:px 0px 0px 0px;font-size: 16px; line-height: 20px; co=
+lor: #000000; word-wrap: break-word;" valign=3D"top"><table width=3D"250" border=
+=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" class=3D"SocialIcons"><tbody=
+><tr><td width=3D"30" align=3D"left" style=3D"font-family: 'Source Sans Pro', Helv=
+etica, Arial, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0=
+;padding-bottom:5px;padding-bottom:1px solid #000000;"><span style=3D"text-ali=
+gn:left; font-size: 16px; line-height: 20px; color: #000000; word-wrap: brea=
+k-word; font-weight: normal;padding-bottom:4px;"><a href=3D"https://urldefense=
+.com/v3/__https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2=
+WckgDS6cabfpLECBQs9C0-2BxJuOW9FwwS9tmfW90QN0SnFzp8t87DSPm6RQgVjYx1rNhuSSAGl0=
+JuWGlGMrW8ZYlEhc1b-2BImCj-2B2q-2FeJgFz-2BMPOUqfNZt6WW9QSgEaBvRYrk4po4UKRMoVv=
+Q44gAu1B-2FZReNempvOipS1zIamEptxxOlBsEDM0Qzs8VWUvI6J9IeEyNrAqltJwufA-2BmERSi=
+LE4oqd3AiUE6C0JY1G0nt2QQddmZ2E5Bysoujcn9MyeVRUT48sNSrlQsgx5-2B9cq5J7fMFczSJm=
+VB-2BWn6YSKbEiltn_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu=
+9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHl=
+UVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM=
+9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAg=
+E-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhS=
+tkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJI=
+RS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24=
+uZ3xy6JtxJK8zHZHLsE8aVEI4LBQFtQ-2FONQVRoJmMq4j1mQyvsS2x-2Fw4ZRJ4Sw6HrqkE83Jk=
+DuBIFqF4yvENBl3yT2Y-2FMepvu1ODvZv8zhO0etIg5k864Ya1zgzzJiuWlQOsANr-2FGzcXTiMz=
+OyOucUOVBmrM7y2FJ5Ug5nY6vGwg-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWAS=
+n5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0Jvj3-jw$"><img src=3D"ht=
+tps://mi.udemy.com/p/rp/ac0087e06d95aad1.png" width=3D"30"></a></span></td><td=
+ width=3D"24" align=3D"left" style=3D"font-family: 'Source Sans Pro', Helvetica, A=
+rial, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;padding=
+-bottom:5px;padding-bottom:1px solid #000000;">&nbsp;</td><td width=3D"30" ali=
+gn=3D"left" style=3D"font-family: 'Source Sans Pro', Helvetica, Arial, sans-seri=
+f;font-size: 20px;font-weight: bold;letter-spacing: 0;padding-bottom:5px;pad=
+ding-bottom:1px solid #000000;"><span style=3D"text-align:left; font-size: 16p=
+x; line-height: 20px; color: #000000; word-wrap: break-word; font-weight: no=
+rmal;padding-bottom:4px;"><a href=3D"https://urldefense.com/v3/__https://ablin=
+k.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2We47ZCbLRGZZyumZ9Tigusf=
+T-2Bwe0NXgUwrUYLZsBTpWBFGlWmSbGpHnHNyC1fxEo2UVbZL9jwkNcz4OmQfa7fbvmEOvkfWZan=
+dMM3xGMK6kqzDUyZagstFqPpbwRp1n-2BXw0cNRZ6Rg3faB-2BZLhXjF-2FUNPc125towdqi6JtA=
+A06Fy3CZV5CFktu7pR3glMOw5FJSluqsqpPav5V87n4b2KxHCaH73sEH3Cyq4-2BIPFqy4YMYURt=
+HsrTQ2oaxEO3ua792s0eJBhjmiYzYjWoFNs6qhVPgfZVXIMyh5HQfd8xLDAne2wEbdrWM1jXvsSE=
+vOfA-3D-3Du5za_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9Dc=
+QHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVu=
+akgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RF=
+AIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2=
+BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkT=
+e-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2=
+qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3=
+xy6JtxJK8zHZHLsE8aV6E0ld7B8HWF9Z3lLIMRzLKUx-2FWTeImm3NeRw4oN-2FjHwXVtGUDl6-2=
+FBeBj5DlWS1NCXwmtTLfo9pjKd4wiM3v1J-2FhVjMOQS4eoGYYvZ6UTMaRUfS-2BJ38u-2BFrIpY=
+ZNEMptt4vMc8ztN4S0d7W1EVyWCAA-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWA=
+Sn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC00lwiMGs$"><img src=3D"h=
+ttps://mi.udemy.com/p/rp/71a2f94f39d027be.png" width=3D"30"></a></span></td><t=
+d width=3D"24" align=3D"left" style=3D"font-family: 'Source Sans Pro', Helvetica, =
+Arial, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;paddin=
+g-bottom:5px;padding-bottom:1px solid #000000;">&nbsp;</td><td width=3D"30" al=
+ign=3D"left" valign=3D"middle" style=3D"font-family: 'Source Sans Pro', Helvetica,=
+ Arial, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;paddi=
+ng-bottom:5px;padding-bottom:1px solid #000000;"><span style=3D"text-align:lef=
+t; font-size: 16px; line-height: 20px; color: #000000; word-wrap: break-word=
+; font-weight: normal;padding-bottom:4px;"><a href=3D"https://urldefense.com/v=
+3/__https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2YxMQ6N=
+oO5r19EMdDYMX3qXsOsa83zPIjLOLolYkd59yXdBDN2LCFD5QsZ-2Byufz6UhKTWwtI9KCfVOiAU=
+Ql7iZPTQ40YgDEgpAjBaMBVHszqqKqLYyMZ3gDz048EB6JybsvtPRQRlzTVmWQ6DgE29Z8QPCxEo=
+fAnk0lspFuglGaKrEP2IXaurNQVtVuJU-2B-2B-2F6aNi-2FfxYGEqST1-2F360KvbmO4OOIlwXs=
+k5IIeaXjCb-2B6GneXiouM3bOO-2FGrU5nAbDEX7x5ZGwyx9sXkUaQ5sMZ8aug7i79e86pyA7Vjh=
+ckpA8dPTy_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A=
+76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeV=
+BIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDC=
+Duv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTr=
+WNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2Fl=
+ES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOs=
+i2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6Jt=
+xJK8zHZHLsE8aVb-2B-2BbSZBWajWFdMPRtA6mZjFChkwbnggUqBXv8EMc4AhmtRLM2P-2FqCfe0=
+eRHlV11D6rTGOMxuiO0fEfciz-2F22DCEpaNB6d8VYZ1taT36Md-2BvkDWd0r9xh3ysh2J4GPG-2=
+FSQjcPaMwSwvE5pVkvwZJ4DA-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iV=
+MZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0mpeyG1g$"><img src=3D"https:=
+//mi.udemy.com/p/rp/2ecf0f3c2ed09bdb.png" width=3D"30"></a></span></td><td wid=
+th=3D"24" align=3D"left" style=3D"font-family: 'Source Sans Pro', Helvetica, Arial=
+, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;padding-bot=
+tom:5px;padding-bottom:1px solid #000000;">&nbsp;</td><td width=3D"30" align=3D"=
+left" valign=3D"middle" style=3D"font-family: 'Source Sans Pro', Helvetica, Aria=
+l, sans-serif;font-size: 20px;font-weight: bold;letter-spacing: 0;padding-bo=
+ttom:5px;padding-bottom:1px solid #000000;"><span style=3D"text-align:left; fo=
+nt-size: 16px; line-height: 20px; color: #000000; word-wrap: break-word; fon=
+t-weight: normal;padding-bottom:4px;" valign=3D"top"><a href=3D"https://urldefen=
+se.com/v3/__https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreU=
+v2S27Rz-2BprmNur3LY6sjamXMoVTxT5mRu3pR0xPlMkh5ajNJKidBCPm4w2bo73AXSqkGRlr6Dl=
+MVKxWpH8bpL7YY4kKG9KN6Er3MdcYKnGlm-2BJFLsh0eKCLYG3kfqXvPpUiAR-2B404KHPgE7ktg=
+WZaQwRVP5H-2FhJAspCCthrmls1B5-2F6tLLqQTCE8wMt-2BirUlnJMWCJ1v3oYdzjwqxSjZ5YIZ=
+U0f6cmZi33G-2BEq5M-2BvXY0mVK-2Bbyp-2FZXnbVwVORBaADkY41RRcuPA3otwz7N2xSs3UwfY=
+l7FwH7-2BeZx7ohvDsGwEIi_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ=
+9StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnK=
+b6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93Vs=
+daNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7j=
+Z-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n3=
+86SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weH=
+IoJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn=
+22EP24uZ3xy6JtxJK8zHZHLsE8aVbV62XVeeiKM1DFdaABP8vMmHC0CET0IYvWcZ9o-2FZw2ne8z=
+pntjCsdbhd5BoqwksOvg3lP4VFNg8wvON2ywinWwt0OESr-2BH0AwRzDA0-2FHYsczKAu7FaE8e4=
+YoDXDRf-2FgtBDlfTKI-2Frx5FkfBkso-2FQmQ-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OS=
+eAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0xxVmIZE$"><i=
+mg width=3D"34" src=3D"https://mi.udemy.com/p/rp/c413dcf3614a285f.png" valign=3D"t=
+op"></a></span></td><td width=3D"24" align=3D"left" style=3D"font-family: 'Source =
+Sans Pro', Helvetica, Arial, sans-serif;font-size: 20px;font-weight: bold;le=
+tter-spacing: 0;padding-bottom:5px;padding-bottom:1px solid #000000;">&nbsp;=
+</td><td width=3D"55" height=3D"24" align=3D"left" style=3D"font-family: 'Source San=
+s Pro', Helvetica, Arial, sans-serif;font-size: 20px;font-weight: bold;lette=
+r-spacing: 0;padding-bottom:5px;padding-bottom:1px solid #000000;"><span sty=
+le=3D"text-align:left; font-size: 16px; line-height: 20px; color: #000000; wor=
+d-wrap: break-word; font-weight: normal;padding-bottom:4px;"><a href=3D"https:=
+//urldefense.com/v3/__https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4=
+loP1Y9YreUv2dzYWwGibr6EeLMnkaipOBK4qbtX-2BcODtRO7LMNgq1aW2nt0voUMST7U-2BiEZx=
+9eIkh9Oo4TFL5wkX2xMaNfq-2FWz26ALJPAPhYAKhxbTm7O5LhHVCZlSscyEb890nmwUKec8Kycc=
+yL93vpVECUrPQDx97kT3hUJIBuYUjUntLN0R4G65IUxIdz8jOHg5LcFsZFizokfe5rcjYvEqGlVz=
+VIiFEzaZRW-2B97zOs-2BYhGxb9xljWcwV-2FLrcvrL-2BgRCK4bekLpy6dOTvVA50yQNbYGxnox=
+jE6J7w-2FrPO5MIFaWbR26GFgOB_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2=
+FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWF=
+UpnKb6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o=
+93VsdaNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1H=
+kx7jZ-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlF=
+c5n386SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf=
+5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3=
+QLgn22EP24uZ3xy6JtxJK8zHZHLsE8aVQlgTG2CNECzD3IDAIa0j5OhJmcki3ZdzdkW-2BMNSZ-2=
+Bo0pjXTD3K3m4Ud79qQIRvgjdfI7n3sJm5ZfSUGoxYcGZtJCH5Q-2Fiaco-2BPKkxx5tVTHaZIeL=
+v66gg9FQPBju9RYk4Y-2FAG0NUU0hQnDD4nyYMpg-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9=
+OSeAsGlZIWASn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC02TKpN1M$">=
+<img src=3D"https://s3.amazonaws.com/udemy-images/email/Facebook_logo.png" wid=
+th=3D"34"></a></span></td></tr><!-- Divider --><tr><td height=3D"20" colspan=3D"9"=
+>&nbsp;</td></tr><!--/divider--></tbody></table></td></tr><tr><td style=3D"tex=
+t-align:left; padding:px 0px 0px 0px;font-size: 16px; line-height: 20px; col=
+or: #000000; word-wrap: break-word;" valign=3D"top" height=3D"45"><table width=3D"=
+290" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" class=3D"SocialIc=
+ons"><!--/divider--><tbody><tr><td width=3D"90" align=3D"left" style=3D"font-size:=
+ 17px; line-height:20px;word-break: break-all; color:#ffffff;"><strong><a st=
+yle=3D"color:#fffFff;text-decoration: none;" href=3D"https://urldefense.com/v3/_=
+_https://ablink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2Qk2mYDyVd=
+sgBmDh4n-2FB1T74BYL0DH62dJnpPpNKRRmGyO32vlrlg-2BJnofmoYkf0y2slU89vBmaNZb2wA3=
+nlEp0P9xlqfUyAHtPoBUXhqzYrWXhoIgGhLaEcpZrjGdti4HmbLPPQ8yTzh52AmVx8XH5E6c7Fjk=
+QECbQDzPxUjJsw7d0pRAz9V2p-2B9DDdlv1D4uyVGiDA-2Bh1A2wM05jxzUJtas37ZjCz3NMOK0i=
+H0TLB6Cf9EjckfBcluuIzl6z0XXNgEcSrRGjkDhdCIcISoPZmEKuzvOHEZlT4LsveGzeZ3Wf_n_X=
+E6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKz=
+gJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYO=
+gtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAA=
+N5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzub=
+zF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHT=
+x9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcp=
+D-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE=
+8aVGepkJ4qTW-2FAaWyaS7CxpYOIVQ-2FBqoZSGyvzWcMv1WcrmFIikiRK8qd3ziVpuQ1Uh-2Fhv=
+7k9-2FSRhr1SEV2CzLIXn0N6TGJ61Tmg87-2BMj68u17j3pLk9UKDejdgpHVlIQECu9fAu16B0LF=
+V6VDjsk63-2FA-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12=
+r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0Nykuy44$" class=3D"mobFont16">About us<=
+/a></strong></td><td width=3D"18" align=3D"left" style=3D"font-size: 17px; line-he=
+ight:20px;word-break: break-all;color:#ffffff;">|&nbsp;</td><td width=3D"170" =
+align=3D"left" style=3D"font-size: 17px; line-height:20px;word-break: break-all;=
+color:#ffffff;"><strong><a href=3D"https://urldefense.com/v3/__https://ablink.=
+alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2Y4-2BSE0QybzihdrMJipZ-2FW=
+Wr4076eMkRyM7O1ZjJIsEp-2F2r4RPcyqtQLHPtM2Phu6KEwXQTsZDu-2BUPkNGbbadPsBApcjNG=
+SceLRnWSNBxjeRsq-2FSRy4wS-2FpRzABpLYjH39VsC9CB-2FtMIDVqCUDEwUZPlh0WoKdVGmx7Y=
+rJ-2B7TnEgjqFrT4y096edVIx0fYJeW48YC-2F7B37ea6mvkxuonJLG-2BJdLitBvUGoamWYiqEh=
+14HHaYb9BFAEls2ciryhSz-2FZAtB7TNMUrUbRrCVVguaVtXOwt4zdDGZCSDOxcmYOhdoRcQ_XE6=
+iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A76nQpSM5LKzgJ=
+8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVBIFEXRZgVYOgt=
+GNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCDuv5wagLiAAN5=
+HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrWNk19JZFzubzF=
+7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlES1Qf0D6JHTx9=
+u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi2vRxqbGTcpD-=
+2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6JtxJK8zHZHLsE8a=
+VN0UePTRUiZOk-2FjOO-2Buc4xPtkjxO8gibe0WkOzomyDbzd9wQdGbQZuzZERKyjttQlagQ4A7M=
+DrgBMOlfXx31aM7K90vcAXFhnAT-2BSP7OxzupDO6OOEgN-2Fz2L5ceABDQnsuPMva5EmOYuFogL=
+rzsa-2Bbw-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVMZpOOSnXg12r6G5=
+fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0oYuCWHE$" style=3D"color:#ffffff;text-decor=
+ation: none;" class=3D"mobFont16">Udemy Business</a></strong></td></tr></tbody=
+></table></td></tr><tr><td colspan=3D"3" height=3D"50"><table width=3D"100%" cellp=
+adding=3D"0" cellspacing=3D"0"><tbody><tr><td colspan=3D"3" style=3D"padding-top:70p=
+x;" class=3D"Pt-50"><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" align=3D=
+"center"><tbody><tr><td align=3D"left" style=3D"font-size: 13px; letter-spacing:=
+0.25px;line-height:20px; padding-bottom:25px;border-bottom:1px solid #ffffff=
+;color:#ffffff;">You are receiving this email because you signed up on Udemy=
+.com with this email address.</td></tr></tbody></table></td></tr><tr><td ali=
+gn=3D"center" style=3D"padding-top:36px;color:#ffffff;"><table width=3D"180" align=
+=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"centerOnMob"><tbody><tr><td=
+ width=3D"90" align=3D"center" style=3D"font-size: 14px; line-height:20px; padding=
+-bottom:0px;color:#ffffff;"><a href=3D"https://urldefense.com/v3/__https://abl=
+ink.alerts.udemy.com/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2eaVL5L1w5BIMD1u7vMXJC=
+AZG0TkvU3mpLPEzeNhkcDfjjIn8-2FChwwX23YeugCNqNqysGx3M6iH-2BfQg1y8WenGLWbIrfMB=
+vPXMRiUjwiYaibbVrrCCjwKziKuHXLl8SzjEbRnNMUHsYyk4mga0z7Fn5Tz3REFTr4D-2BqpBEXy=
+A25KIVEpoqE6OGZkvlWzfavoYr6HiiXO6D0z5rJF2RjW5-2BWJnGgvje6ww4Vifk9uM-2BGgvNjS=
+RKWJmHusmoOYd6f0vijfTsEgNfh97n6FQkDY9Y1HPux0CA97zw6480sAS-2Byzl-2FsdARDTcc7J=
+7tSrC4-2F7tg-3D-3DarnJ_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9=
+StMiu9DcQHK7A76nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb=
+6ovHlUVuakgeVBIFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93Vsd=
+aNyeM9RFAIHDCDuv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ=
+-2FAgE-2BgoTrWNk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n38=
+6SxhStkTe-2FlES1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHI=
+oJfJIRS2qAUOsi2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn2=
+2EP24uZ3xy6JtxJK8zHZHLsE8aVTKpaT-2BjgzFv5qc4-2BcLkfNfaLv3NYT2HPkArbI6SHBsWP5=
+jo4RGB7Rm8IPScrGwGsh26Th8aogp3WmLwKmb-2BUxaSYpaVCjwZpYsRNvFmQHYq30SOTNhknK5E=
+CIOkPKDhl3mjiEilDFl26vRgSppHFBw-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZI=
+WASn5iVMZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC0lWr2jMo$" style=3D"co=
+lor:#ffffff;text-decoration: none;">Support</a></td><td width=3D"135" align=3D"c=
+enter" style=3D"font-size: 14px; line-height:20px; padding-bottom:0px;color:#f=
+fffff;"><a href=3D"https://urldefense.com/v3/__https://ablink.alerts.udemy.com=
+/ls/click?upn=3DgjQpuGGK4loP1Y9YreUv2UTtY4hAO-2Fa9OFcz726oA7tihToqWLoLyZ7I27MP=
+8p-2BuCw1xmu5o50ws3rZ-2FK7ww0kXafCif-2FTF5z1XXZl-2BBntALxget-2Bm302mU1V0uL9g=
+EDTBEJLl1pIUn5SNp3c6hMTwQdQXFvjwchJqBaL2BXJYE0IyDO0vVi7azuQIJy4rkf7jA8-2F1Vk=
+CyUxNczPwLX86tl-2Fdkk9HN-2FKmaFw9KJoSTAGjE-2BSJ3PNLlVaz89DY0-2BVt27grELM409e=
+JxN6xidh6hQCswXKori0vyFYSP5rGaOYJXyibGivQPuH94hW59yS1XhHaGHL0qDkk56BNQH2tQ-3=
+D-3DO9sY_XE6iNkndNO68yj-2BVm5urw7GDzjh8UJmIwfJuOvbOZZqC-2FUgJ9StMiu9DcQHK7A7=
+6nQpSM5LKzgJ8lvoVmKNvvTih135arn-2BqsB8zuh9It7em4B9v3hlYWFUpnKb6ovHlUVuakgeVB=
+IFEXRZgVYOgtGNNukLQnRhvKNxLU-2FdlmfBPpM6fqIpwjucKJpb-2B5o93VsdaNyeM9RFAIHDCD=
+uv5wagLiAAN5HVRP2JUbHPPtsy-2FipCMX9FQezSt-2BDGQZkJwlpQR1Hkx7jZ-2FAgE-2BgoTrW=
+Nk19JZFzubzF7ipaTSDHAGa9hRL2DHsMX9xgE3TsKPvcvn90uyQFTwzlFc5n386SxhStkTe-2FlE=
+S1Qf0D6JHTx9u5KnsTVG1jH2E0KPOeCYorTVRvIqSbRtgE8TPPuowkEbf5weHIoJfJIRS2qAUOsi=
+2vRxqbGTcpD-2FNDcqK-2BfBnqG2OEJTlVvCXnZa92GzRdYcBBLpllhd3QLgn22EP24uZ3xy6Jtx=
+JK8zHZHLsE8aVIdkgkqKjj0wdehg8hCLNl-2BQwNOe4I-2BaWqUJxWJfi25pDCLSDWjkC1VAr6S-=
+2BIjWUsjV-2FSRFMhCMY6OgdAiHFpNMEnVcDVoQSCjzUNqCNNpboGUCZ-2FGxHR4qIoH7A-2FXCl=
+RvW2Ay6zCifwaXFPrYFqrXQ-3D-3D__;!!ORgEfCBsr282Fw!v7kilL_QB9OSeAsGlZIWASn5iVM=
+ZpOOSnXg12r6G5fuzcgThwByqWryLRAS7vuqqWACIXPpuhAC06XsKY5o$" style=3D"color:#fff=
+fff;text-decoration: none;">Privacy terms</a></td></tr></tbody></table></td>=
+</tr><tr><td style=3D"padding-top:60px;"><table width=3D"100%" cellpadding=3D"0" c=
+ellspacing=3D"0" align=3D"center"><tbody><tr><td width=3D"15%" align=3D"left" style=3D=
+"font-size: 14px; line-height:20px; text-align: left;padding-bottom:0px;">&n=
+bsp;</td><td width=3D"70%" align=3D"center" style=3D"font-size: 12px; line-height:=
+20px; text-align: center;padding-bottom:0px;color:#ffffff;">Udemy.com 600 Ha=
+rrison Street, 3rd Floor San Francisco, CA 94107 USA</td><td width=3D"15%" ali=
+gn=3D"left" style=3D"font-size: 14px; line-height:20px; text-align: left;padding=
+-bottom:0px;">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td=
+></tr></tbody></table></td></tr><tr><td>&nbsp;</td></tr><tr><td style=3D"paddi=
+ng:8px 30px"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" =
+role=3D"presentation"></table></td></tr><tr><td></td></tr><tr><td></td></tr></=
+tbody></table></td></tr></tbody></table></td></tr></tbody></table><!-- // FO=
+OTER --><!-- Footer --></body></html>
+
+--B_3754923735_2865549937--
+
